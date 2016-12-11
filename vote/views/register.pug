@@ -1,0 +1,34 @@
+extends base
+
+block vars
+  - var title = 'Register'
+
+block body
+  div.maindiv
+    br
+    br
+    div.registerdiv
+      h1 Create an Account
+    
+      if error
+        p ERROR: #{error}
+    
+      form(method="post")
+        label.reglabel First Name:
+        input.reginput(type="text", name="firstName", required=true)
+        br
+        br
+        label.reglabel Last Name:
+        input.reginput(type="text", name="lastName", required=true)
+        br
+        br
+        label.reglabel Email:
+        input.reginput(type="email", name="email", required=true)
+        br
+        br
+        label.reglabel Password:
+        input.reginput(type="password", name="password", required=true)
+        br
+        br
+        br
+        input.butt(type="submit")

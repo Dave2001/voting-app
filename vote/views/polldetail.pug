@@ -1,0 +1,74 @@
+extends base
+
+block vars
+  - var title = 'Polls'
+  
+block body
+
+  div.maindiv
+    br
+    div.polldiv
+      div.optiondiv
+        form(id="poll-options", method="post" action='/vote')
+          input(type="hidden" name="qid" id="qid" value= locals.poll._id )
+          br
+          span.pollheader #{locals.poll.question}
+          if locals.user
+            if locals.votes
+              br
+              br
+              span You voted on this poll!  
+              br
+              br
+              input(type="button" id="showbutton" value="Show Results" onClick="displaychart();") 
+              div.chartdiv(id="chartDiv" ) 
+               div(id="chartContainer" )
+              br
+              br
+              if poll.owner=locals.user._id
+                span You are the owner of this poll
+                  input.buttmini(type="button" value="Delete this poll" onClick="location.href='/delete/?poll=" + locals.poll._id + "'") 
+              br
+              br
+              input.butt(type="button" value="Back" onClick="location.href='/polls'") 
+              br
+              br
+              script(src="/static/js/dochart.js")
+              script(type='text/javascript').
+                var options =!{JSON.stringify(locals.poll.options)};
+            else
+              br
+              br
+              br    
+              each option in poll.options
+                span.choice 
+                  input(type="radio" name="choice" value=option._id) 
+                  span #{option.text}
+                br
+                br
+              input.butt(type="submit" value="Submit")   
+              br
+              br
+              if poll.owner=locals.user._id
+                input.butt(type="button" value="Delete this poll"  onClick="location.href='/delete/?poll=" + locals.poll._id + "'")
+              input.butt(type="button" value="Cancel" onClick="location.href='/polls'") 
+              br
+              br
+          else 
+            //- no user, just display the results
+            br
+            br
+            div.chartdiv(id="chartDiv" ) 
+             div(id="chartContainer" )
+            br
+            br
+            span You must be logged in to vote
+            br
+            br
+            input.butt(type="button" value="Back" onClick="history.back(-2);") 
+            br
+            br
+            script(src="/static/js/dochart.js")
+            script(type='text/javascript').
+              var options =!{JSON.stringify(locals.poll.options)};
+            

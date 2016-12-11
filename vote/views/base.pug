@@ -1,0 +1,18 @@
+block vars 
+doctype html
+head
+ link(rel="stylesheet", href="/static/css/main.css")
+ link(rel='stylesheet', href='https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css')    
+ title Make It Count | #{title}
+ html
+  body
+    div.navdiv
+      div.header(onclick="location.href='/polls';") Make It Count 
+      if user
+        div.fa.fa-2x.fa-user-circle.username  #{user.firstName} #{user.lastName} 
+           span.fa.fa-sign-out(title="Sign out" onclick="location.href='/logout';")  
+      else
+        div.fa.fa-2x.fa-sign-in.username(onclick="location.href='/login';")  Sign in
+    block body
+    script(src="/static/js/main.js")
+    script(src="https://cdnjs.cloudflare.com/ajax/libs/canvasjs/1.7.0/canvasjs.min.js")

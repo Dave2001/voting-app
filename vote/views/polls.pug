@@ -1,0 +1,28 @@
+extends base
+
+block vars
+  - var title = 'Polls'
+
+block body
+
+  div.maindiv
+    div.polldiv
+      if !questions
+        p No polls found
+      else
+        if user
+          br
+          input.butt(type="button" value="Create new poll" onClick="choosePoll('New');") 
+          br
+        br
+        span.pollheader Current polls
+        div.formdiv
+          form(id="poll-list", method="post")
+            input(type="hidden" name="qid" id="qid" value="")
+            each question in questions
+              - var qid = question._id
+              - var quest = question.question
+              p.plist(onClick="choosePoll('" + qid + "');")
+               span.poll #{quest} 
+                br
+              br

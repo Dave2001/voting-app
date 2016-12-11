@@ -1,0 +1,28 @@
+extends base
+
+block vars
+  - var title = 'Create Poll'
+
+block body
+
+  div.maindiv
+    div.polldiv
+      br
+      p.pollheader Create poll
+      form(id="create-poll", method="post")
+        span Please enter your poll question and choices below:
+          br
+          br
+          input.createinput(type="text" name="question" id="question" size="70")
+          br
+          br
+          span(id="qchoices")
+          br
+          br
+          input.butt(type="button" value="Add choice" onClick="addchoice();")
+          br
+          br
+          input.butt(type="button" value="Submit" onClick="validate();")
+          input.cancelbutton.butt(type="button" value="Cancel" onClick="history.back();")
+          br
+          br
